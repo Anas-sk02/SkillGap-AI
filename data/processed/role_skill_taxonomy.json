@@ -1,0 +1,70 @@
+{
+  "Data Scientist": {
+    "skills": [
+      {"name": "Python", "stage": "Foundational", "weight": 0.95},
+      {"name": "Statistics", "stage": "Foundational", "weight": 0.90},
+      {"name": "SQL", "stage": "Foundational", "weight": 0.85},
+      {"name": "Data Visualization", "stage": "Foundational", "weight": 0.75},
+      {"name": "Pandas", "stage": "Intermediate", "weight": 0.88},
+      {"name": "NumPy", "stage": "Intermediate", "weight": 0.82},
+      {"name": "Machine Learning", "stage": "Intermediate", "weight": 0.92},
+      {"name": "Feature Engineering", "stage": "Intermediate", "weight": 0.78},
+      {"name": "Scikit-learn", "stage": "Intermediate", "weight": 0.85},
+      {"name": "Deep Learning", "stage": "Applied", "weight": 0.72},
+      {"name": "NLP", "stage": "Applied", "weight": 0.65},
+      {"name": "ML Deployment", "stage": "Applied", "weight": 0.68},
+      {"name": "A/B Testing", "stage": "Applied", "weight": 0.60}
+    ]
+  },
+  "Backend Developer": {
+    "skills": [
+      {"name": "Python", "stage": "Foundational", "weight": 0.88},
+      {"name": "SQL", "stage": "Foundational", "weight": 0.90},
+      {"name": "REST APIs", "stage": "Foundational", "weight": 0.95},
+      {"name": "Git", "stage": "Foundational", "weight": 0.80},
+      {"name": "Linux/Bash", "stage": "Foundational", "weight": 0.75},
+      {"name": "Django/Flask/FastAPI", "stage": "Intermediate", "weight": 0.88},
+      {"name": "Database Design", "stage": "Intermediate", "weight": 0.85},
+      {"name": "Authentication/Security", "stage": "Intermediate", "weight": 0.82},
+      {"name": "Unit Testing", "stage": "Intermediate", "weight": 0.78},
+      {"name": "Message Queues", "stage": "Applied", "weight": 0.70},
+      {"name": "Docker", "stage": "Applied", "weight": 0.80},
+      {"name": "CI/CD", "stage": "Applied", "weight": 0.72},
+      {"name": "Microservices", "stage": "Applied", "weight": 0.65}
+    ]
+  },
+  "ML Engineer": {
+    "skills": [
+      {"name": "Python", "stage": "Foundational", "weight": 0.95},
+      {"name": "Machine Learning", "stage": "Foundational", "weight": 0.95},
+      {"name": "Statistics", "stage": "Foundational", "weight": 0.85},
+      {"name": "SQL", "stage": "Foundational", "weight": 0.78},
+      {"name": "Pandas", "stage": "Intermediate", "weight": 0.85},
+      {"name": "NumPy", "stage": "Intermediate", "weight": 0.82},
+      {"name": "Deep Learning", "stage": "Intermediate", "weight": 0.88},
+      {"name": "Scikit-learn", "stage": "Intermediate", "weight": 0.80},
+      {"name": "Model Optimization", "stage": "Intermediate", "weight": 0.78},
+      {"name": "ML Deployment", "stage": "Applied", "weight": 0.92},
+      {"name": "MLOps", "stage": "Applied", "weight": 0.88},
+      {"name": "Docker", "stage": "Applied", "weight": 0.82},
+      {"name": "Feature Engineering", "stage": "Applied", "weight": 0.75}
+    ]
+  },
+  "Frontend Developer": {
+    "skills": [
+      {"name": "HTML/CSS", "stage": "Foundational", "weight": 0.95},
+      {"name": "JavaScript", "stage": "Foundational", "weight": 0.95},
+      {"name": "Responsive Design", "stage": "Foundational", "weight": 0.85},
+      {"name": "Git", "stage": "Foundational", "weight": 0.80},
+      {"name": "React", "stage": "Intermediate", "weight": 0.92},
+      {"name": "State Management", "stage": "Intermediate", "weight": 0.82},
+      {"name": "REST APIs", "stage": "Intermediate", "weight": 0.80},
+      {"name": "TypeScript", "stage": "Intermediate", "weight": 0.78},
+      {"name": "CSS Frameworks", "stage": "Intermediate", "weight": 0.72},
+      {"name": "Testing (Jest/RTL)", "stage": "Applied", "weight": 0.75},
+      {"name": "Performance Optimization", "stage": "Applied", "weight": 0.70},
+      {"name": "Webpack/Vite", "stage": "Applied", "weight": 0.68},
+      {"name": "Accessibility (a11y)", "stage": "Applied", "weight": 0.65}
+    ]
+  }
+}
