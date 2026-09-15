@@ -2,10 +2,11 @@ import sys
 import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(__file__))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routes import profile, skillgap, roadmap, roles, progress
+from routes import profile, skillgap, roadmap, roles, progress
 
 app = FastAPI(
     title="SkillGap AI API",
