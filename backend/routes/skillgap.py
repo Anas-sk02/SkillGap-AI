@@ -1,15 +1,15 @@
 from fastapi import APIRouter, HTTPException
 from backend.schemas import StudentProfile, SkillGapResponse, MissingSkill
 from backend.services import prediction_service, recommendation_service
+from ml.preprocessing import ROLES
 
 router = APIRouter()
 
 
 @router.post("/skillgap", response_model=SkillGapResponse)
 def get_skillgap(profile: StudentProfile):
-    valid_roles = ["Data Scientist", "Backend Developer", "ML Engineer", "Frontend Developer"]
-    if profile.target_role not in valid_roles:
-        raise HTTPException(status_code=400, detail=f"Invalid role. Choose from: {valid_roles}")
+    if profile.target_role not in ROLES:
+        raise HTTPException(status_code=400, detail=f"Invalid role. Choose from: {sorted(ROLES)}")
 
     valid_exp = ["Beginner", "Intermediate", "Advanced"]
     if profile.experience_level not in valid_exp:

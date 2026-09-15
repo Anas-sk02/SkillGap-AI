@@ -8,10 +8,12 @@ const FEATURES = [
 ]
 
 const ROLES = [
-  { name: 'Data Scientist', icon: '📊', color: '#63b3ed' },
-  { name: 'ML Engineer', icon: '🤖', color: '#b794f4' },
-  { name: 'Backend Developer', icon: '⚙️', color: '#68d391' },
-  { name: 'Frontend Developer', icon: '🎨', color: '#f6ad55' },
+  { name: 'AI Engineer', icon: '🧠', color: '#b794f4' },
+  { name: 'DevOps Engineer', icon: '🚀', color: '#f6ad55' },
+  { name: 'Full Stack Developer', icon: '💻', color: '#68d391' },
+  { name: 'Cloud Engineer', icon: '☁️', color: '#63b3ed' },
+  { name: 'Data Scientist', icon: '📊', color: '#4fd1c5' },
+  { name: 'Cybersecurity Analyst', icon: '🛡️', color: '#fc8181' },
 ]
 
 export default function Home() {
@@ -103,6 +105,23 @@ export default function Home() {
             {role.icon} {role.name}
           </div>
         ))}
+        <div
+          style={{
+            display: 'flex', alignItems: 'center', gap: '0.5rem',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px dashed var(--border-subtle)',
+            borderRadius: 999,
+            padding: '0.45rem 1rem',
+            fontSize: '0.85rem',
+            color: 'var(--text-muted)',
+            fontWeight: 500,
+            cursor: 'pointer',
+            transition: 'var(--transition)',
+          }}
+          onClick={() => navigate('/explore')}
+        >
+          ✨ +10 More Roles in Catalogue →
+        </div>
       </div>
 
       <div style={{ marginBottom: '5rem' }}>
@@ -136,7 +155,7 @@ export default function Home() {
         marginBottom: '3rem',
       }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-          {[['90%+', 'Model Accuracy'], ['4', 'Tech Roles'], ['2,500+', 'Training Samples'], ['3', 'Learning Stages']].map(([val, label]) => (
+          {[['88%+', 'Model Accuracy'], ['16', 'Tech Roles'], ['8,000+', 'Training Samples'], ['128', 'Mapped Skills']].map(([val, label]) => (
             <div key={label} style={{ textAlign: 'center' }}>
               <div style={{
                 fontFamily: 'var(--font-display)',

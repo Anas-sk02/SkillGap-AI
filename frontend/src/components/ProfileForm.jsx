@@ -1,6 +1,24 @@
 import { useState, useRef, useEffect } from 'react'
+import { getAllRoles } from '../api/client'
 
-const ROLE_OPTIONS = ['Data Scientist', 'Backend Developer', 'ML Engineer', 'Frontend Developer']
+const DEFAULT_ROLE_OPTIONS = [
+  'AI Engineer',
+  'Backend Developer',
+  'Blockchain Developer',
+  'Cloud Engineer',
+  'Cybersecurity Analyst',
+  'Data Engineer',
+  'Data Scientist',
+  'DevOps Engineer',
+  'Embedded Systems Engineer',
+  'Frontend Developer',
+  'Full Stack Developer',
+  'Game Developer',
+  'Java Developer',
+  'ML Engineer',
+  'Mobile App Developer',
+  'QA / Automation Engineer',
+]
 const EXPERIENCE_OPTIONS = ['Beginner', 'Intermediate', 'Advanced']
 
 const ALL_SKILLS_BY_ROLE = {
@@ -8,6 +26,18 @@ const ALL_SKILLS_BY_ROLE = {
   'Backend Developer': ['Python', 'SQL', 'REST APIs', 'Git', 'Linux/Bash', 'Django/Flask/FastAPI', 'Database Design', 'Authentication/Security', 'Unit Testing', 'Message Queues', 'Docker', 'CI/CD', 'Microservices'],
   'ML Engineer': ['Python', 'Machine Learning', 'Statistics', 'SQL', 'Pandas', 'NumPy', 'Deep Learning', 'Scikit-learn', 'Model Optimization', 'ML Deployment', 'MLOps', 'Docker', 'Feature Engineering'],
   'Frontend Developer': ['HTML/CSS', 'JavaScript', 'Responsive Design', 'Git', 'React', 'State Management', 'REST APIs', 'TypeScript', 'CSS Frameworks', 'Testing (Jest/RTL)', 'Performance Optimization', 'Webpack/Vite', 'Accessibility (a11y)'],
+  'AI Engineer': ['Python', 'Deep Learning', 'Linear Algebra', 'NLP', 'PyTorch', 'Hugging Face', 'Prompt Engineering', 'Vector Databases', 'LangChain/LlamaIndex', 'RAG Architectures', 'LLM Fine-Tuning', 'Model Quantization', 'Autonomous Agents'],
+  'DevOps Engineer': ['Linux/Bash', 'Git', 'Networking', 'Python', 'Docker', 'CI/CD', 'Terraform', 'AWS/Cloud', 'Nginx', 'Kubernetes', 'Prometheus/Grafana', 'Infrastructure as Code', 'Site Reliability (SRE)'],
+  'Java Developer': ['Java', 'Object-Oriented Programming', 'Data Structures & Algorithms', 'SQL', 'Spring Boot', 'Hibernate/JPA', 'REST APIs', 'Maven/Gradle', 'Unit Testing (JUnit)', 'Microservices', 'Docker', 'Spring Security', 'Kafka/Message Queues'],
+  'Cloud Engineer': ['Linux/Bash', 'Networking', 'Python', 'Git', 'AWS/Cloud', 'Terraform', 'Docker', 'Cloud Security/IAM', 'Serverless (Lambda)', 'Kubernetes', 'Multi-Cloud Architecture', 'Disaster Recovery', 'CI/CD'],
+  'Data Engineer': ['SQL', 'Python', 'Database Design', 'Linux/Bash', 'Pandas', 'Apache Spark', 'Data Warehousing', 'Docker', 'REST APIs', 'Apache Kafka', 'Apache Airflow', 'ETL Pipelines', 'Cloud Data Lakes'],
+  'Cybersecurity Analyst': ['Networking', 'Linux/Bash', 'Operating Systems', 'Python', 'Network Security', 'Wireshark', 'Vulnerability Assessment', 'Cryptography', 'Authentication/Security', 'SIEM Tools', 'Ethical Hacking', 'Incident Response', 'Threat Modeling'],
+  'Full Stack Developer': ['HTML/CSS', 'JavaScript', 'Git', 'SQL', 'React', 'Node.js/Express', 'REST APIs', 'TypeScript', 'Authentication/Security', 'State Management', 'Docker', 'CI/CD', 'Microservices'],
+  'Mobile App Developer': ['JavaScript', 'Dart', 'Object-Oriented Programming', 'Git', 'Flutter/React Native', 'Mobile UI/UX', 'REST APIs', 'State Management', 'Local Storage (SQLite)', 'Firebase', 'App Store Deployment', 'Push Notifications', 'Mobile Performance'],
+  'QA / Automation Engineer': ['Manual Testing', 'Test Case Design', 'Python', 'Git', 'Selenium', 'API Testing', 'Cypress/Playwright', 'Unit Testing', 'SQL', 'CI/CD', 'Performance Testing', 'Test Automation Frameworks', 'Bug Tracking (Jira)'],
+  'Blockchain Developer': ['Cryptography', 'JavaScript', 'Data Structures & Algorithms', 'Git', 'Solidity', 'Smart Contracts', 'Web3.js/Ethers.js', 'Hardhat/Foundry', 'Unit Testing', 'DeFi Protocols', 'Security Auditing', 'Gas Optimization', 'Decentralized Storage (IPFS)'],
+  'Game Developer': ['C++', 'C#', '3D Mathematics', 'Object-Oriented Programming', 'Git', 'Unity/Unreal Engine', 'Physics Engines', 'Game Loop Architecture', '3D Modeling Basics', 'Shader Programming', 'Multiplayer Networking', 'Game AI', 'Performance Optimization'],
+  'Embedded Systems Engineer': ['C', 'C++', 'Computer Architecture', 'Digital Electronics', 'Git', 'Microcontrollers (ARM/ESP32)', 'Protocols (I2C/SPI/UART)', 'RTOS (FreeRTOS)', 'Linux/Bash', 'Device Drivers', 'Embedded Linux', 'Low-Power Optimization', 'Hardware Debugging'],
 }
 
 const ALL_PROJECTS = [
@@ -15,7 +45,12 @@ const ALL_PROJECTS = [
   'E-commerce Site', 'Portfolio Website', 'Data Dashboard', 'Chatbot', 'Image Classifier',
   'Recommendation System', 'Mobile App Backend', 'Docker Deployment', 'Model Deployment API',
   'React Dashboard', 'Database Schema Design', 'A/B Test Analysis', 'NLP Sentiment Analysis',
-  'Feature Engineering Pipeline', 'TypeScript App',
+  'Feature Engineering Pipeline', 'TypeScript App', 'RAG Search Engine', 'LLM Agent Assistant',
+  'Kubernetes CI/CD Pipeline', 'Terraform Cloud Infra', 'Spring Boot Microservices',
+  'AWS Serverless API', 'Big Data ETL Pipeline', 'Kafka Real-Time Stream',
+  'Penetration Testing Lab', 'SIEM Incident Monitor', 'Full Stack MERN App',
+  'Flutter Mobile App', 'Test Automation Suite', 'Web3 DeFi DApp',
+  'Unity 3D Action Game', 'Embedded IoT Sensor Node',
 ]
 
 function TagInput({ value, onChange, suggestions, placeholder, color }) {
@@ -93,13 +128,33 @@ function TagInput({ value, onChange, suggestions, placeholder, color }) {
 }
 
 export default function ProfileForm({ onSubmit, loading }) {
+  const [roleOptions, setRoleOptions] = useState(DEFAULT_ROLE_OPTIONS)
+  const [skillsByRole, setSkillsByRole] = useState(ALL_SKILLS_BY_ROLE)
   const [currentSkills, setCurrentSkills] = useState([])
   const [targetRole, setTargetRole] = useState('')
   const [projects, setProjects] = useState([])
   const [experienceLevel, setExperienceLevel] = useState('')
   const [studentId, setStudentId] = useState(() => `student_${Math.random().toString(36).slice(2, 8)}`)
 
-  const skillSuggestions = targetRole ? ALL_SKILLS_BY_ROLE[targetRole] || [] : Object.values(ALL_SKILLS_BY_ROLE).flat()
+  useEffect(() => {
+    getAllRoles()
+      .then((res) => {
+        if (res?.data?.roles?.length > 0) {
+          const roles = res.data.roles
+          setRoleOptions(roles.map((r) => r.role).sort())
+          const mappedSkills = {}
+          roles.forEach((r) => {
+            mappedSkills[r.role] = r.skills.map((s) => s.name)
+          })
+          setSkillsByRole((prev) => ({ ...prev, ...mappedSkills }))
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch dynamic roles from API, using full fallback list', err)
+      })
+  }, [])
+
+  const skillSuggestions = targetRole ? skillsByRole[targetRole] || [] : Object.values(skillsByRole).flat()
 
   const handleRoleChange = (e) => {
     const newRole = e.target.value
@@ -135,7 +190,7 @@ export default function ProfileForm({ onSubmit, loading }) {
             required
           >
             <option value="">Select a role...</option>
-            {ROLE_OPTIONS.map((r) => <option key={r} value={r}>{r}</option>)}
+            {roleOptions.map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
         </div>
 

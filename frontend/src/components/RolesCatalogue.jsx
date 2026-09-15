@@ -12,6 +12,18 @@ const ROLE_ICONS = {
   'Backend Developer': '⚙️',
   'ML Engineer': '🤖',
   'Frontend Developer': '🎨',
+  'AI Engineer': '🧠',
+  'DevOps Engineer': '🚀',
+  'Java Developer': '☕',
+  'Cloud Engineer': '☁️',
+  'Data Engineer': '🌊',
+  'Cybersecurity Analyst': '🛡️',
+  'Full Stack Developer': '💻',
+  'Mobile App Developer': '📱',
+  'QA / Automation Engineer': '🧪',
+  'Blockchain Developer': '⛓️',
+  'Game Developer': '🎮',
+  'Embedded Systems Engineer': '🔌',
 }
 
 const ROLE_DESCRIPTIONS = {
@@ -19,6 +31,18 @@ const ROLE_DESCRIPTIONS = {
   'Backend Developer': 'Build scalable server-side systems, APIs, and databases that power applications.',
   'ML Engineer': 'Design, deploy, and maintain machine learning pipelines in production environments.',
   'Frontend Developer': 'Craft engaging, accessible user interfaces with modern web technologies.',
+  'AI Engineer': 'Build cutting-edge LLMs, RAG systems, and autonomous agent workflows.',
+  'DevOps Engineer': 'Automate CI/CD pipelines, container orchestration, and cloud infrastructure.',
+  'Java Developer': 'Architect enterprise-grade microservices and robust Spring Boot applications.',
+  'Cloud Engineer': 'Design resilient, highly scalable cloud architectures and serverless systems.',
+  'Data Engineer': 'Build big data ETL pipelines, distributed streaming systems, and data lakes.',
+  'Cybersecurity Analyst': 'Protect network infrastructure, monitor threat telemetry, and lead incident response.',
+  'Full Stack Developer': 'Bridge frontend and backend to deliver complete end-to-end web applications.',
+  'Mobile App Developer': 'Create fluid cross-platform mobile apps for iOS and Android using Flutter/React Native.',
+  'QA / Automation Engineer': 'Build automated testing suites to guarantee software quality and reliability.',
+  'Blockchain Developer': 'Engineer decentralized applications, smart contracts, and Web3 protocols.',
+  'Game Developer': 'Build immersive gameplay systems, physics, and interactive 3D virtual worlds.',
+  'Embedded Systems Engineer': 'Program microcontrollers, firmware, RTOS, and IoT hardware devices.',
 }
 
 export default function RolesCatalogue() {

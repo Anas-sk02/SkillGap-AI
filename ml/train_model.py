@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-from ml.preprocessing import generate_synthetic_dataset, preprocess_dataset, PROCESSED_DIR
+from ml.preprocessing import generate_synthetic_dataset, preprocess_dataset, PROCESSED_DIR, ROLES
 
 ARTIFACTS_DIR = os.path.join(os.path.dirname(__file__), 'model_artifacts')
 
@@ -27,16 +27,20 @@ def evaluate_model(model, X_test, y_test, name):
     }
 
 
-def train_and_benchmark():
+def train_and_benchmark(force_regenerate=False):
     os.makedirs(ARTIFACTS_DIR, exist_ok=True)
     training_path = os.path.join(PROCESSED_DIR, "training_data.csv")
 
-    if not os.path.exists(training_path):
-        df = generate_synthetic_dataset(n_samples=2500)
+    if force_regenerate or not os.path.exists(training_path):
+        df = generate_synthetic_dataset(n_samples=8000)
         os.makedirs(PROCESSED_DIR, exist_ok=True)
         df.to_csv(training_path, index=False)
     else:
         df = pd.read_csv(training_path)
+        if set(df["target_role"].unique()) != set(ROLES):
+            print("Detected outdated roles in training_data.csv. Regenerating dataset for all roles...")
+            df = generate_synthetic_dataset(n_samples=8000)
+            df.to_csv(training_path, index=False)
 
     X, y, *_ = preprocess_dataset(df)
 
